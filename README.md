@@ -1,4 +1,11 @@
 overstalk
 =========
 
-Extract info of Social Networks
+Extract info from Social Networks
+
+Need:
+
+          Getopt::Long
+          LWP::UserAgent
+
+
