@@ -9,7 +9,6 @@ sub nick_main {
 	&nick_myspace($nick);
 	&nick_pinterest($nick);
 	&nick_linkedin($nick);
-	&nick_photobucket($nick);
 	&nick_flickr($nick);
 	&nick_dailymotion($nick);
 	&nick_etsy($nick);
@@ -23,7 +22,6 @@ sub nick_main {
 	&nick_instructables($nick);
 	&nick_foursquare($nick);
 	&nick_reddit($nick);
-	&nick_livejournal($nick);
 	&nick_epinions($nick);
 	&nick_gather($nick);
 	
@@ -107,16 +105,6 @@ sub nick_linkedin {
         }
 }
 
-sub nick_photobucket {
-        $nick = $_[0];
-        $req = $ua->get("http://s1239.photobucket.com/user/".$nick."/profile/");
-        print "Photobucket: ";
-        if ($req->status_line !~ /404/) {
-                print "YES! ( http://s1239.photobucket.com/user/$nick/profile )\n";
-        } else {
-                print "NO!\n";
-        }
-}
 
 sub nick_flickr {
         $nick = $_[0];
@@ -187,10 +175,10 @@ sub nick_disqus {
 
 sub nick_devianart {
         $nick = $_[0];
-        $req = $ua->get("http://".$nick.".devianart.com");
+        $req = $ua->get("http://".$nick.".deviantart.com");
         print "Devianart: ";
         if ($req->status_line !~ /404/) {
-                print "YES! ( http://".$nick.".devianart.com"." )\n";
+                print "YES! ( http://".$nick.".deviantart.com"." )\n";
         } else {
                 print "NO!\n";
         }
@@ -200,7 +188,7 @@ sub nick_slideshare  {
         $nick = $_[0];
         $req = $ua->get("http://www.slideshare.net/".$nick);
         print "SlideShare: ";
-        if ($req->decoded_content !~ /404/) {
+        if ($req->status_line !~ /404/) {
                 print "YES! ( http://www.slideshare.net/$nick )\n";
         } else {
                 print "NO!\n";
@@ -209,10 +197,10 @@ sub nick_slideshare  {
 
 sub nick_lastfm {
         $nick = $_[0];
-        $req = $ua->get("https://www.lastfm.com/user/".$nick);
+        $req = $ua->get("http://www.lastfm.com/user/".$nick);
         print "LastFM: ";
         if ($req->status_line !~ /404/) {
-                print "YES! ( https://www.lastfmk.com/user/$nick )\n";
+                print "YES! ( http://www.lastfm.com/user/$nick )\n";
         } else {
                 print "NO!\n";
         }
@@ -230,14 +218,14 @@ sub nick_ustream {
 }
 
 sub nick_instructables {
-        $nick = $_[0];
-        $req = $ua->get("http://www.instrcutables.com/member/".$nick);
-        print "Instructables: ";
-        if ($req->status_line !~ /400/) {
-                print "YES! ( http://www.instructables.com/member/$nick )\n";
-        } else {
-                print "NO!\n";
-        }
+	$nick = $_[0];
+	$req = $ua->get("http://www.instructables.com/member/".$nick);
+	print "Instructables: ";
+	if ($req->status_line !~ /400/) {
+		print "YES! ( http://www.instructables.com/member/$nick )\n";
+	} else {
+	print "NO!\n";
+	}
 }
 
 sub nick_foursquare {
@@ -262,16 +250,7 @@ sub nick_reddit($nick) {
         }
 }
 
-sub nick_livejournal($nick) {
-        $nick = $_[0];
-        $req = $ua->get("http://".$nick."livejournal.com");
-        print "LiveJournal: ";
-        if ($req->status_line !~ /404/) {
-                print "YES! ( http://$nick.livejournal.com )\n";
-        } else {
-                print "NO!\n";
-        }
-}
+
 
 sub nick_epinions {
         $nick = $_[0];

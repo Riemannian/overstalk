@@ -17,7 +17,8 @@ require 'lib/sn/lastfm.pl';
 require 'lib/sn/steam.pl';
 require 'lib/check.pl';
 require 'lib/nick.pl';
-
+require 'lib/email.pl';
+require 'lib/process.pl';
 
 binmode STDOUT, ':utf8';
 
@@ -37,7 +38,8 @@ GetOptions(
 	
 	"check=s" => \$flag_check,
 	"nick=s" => \$flag_nick,
-
+	"email=s" => \$flag_email,
+	"process=s" => \$flag_process,
 	
 	"steam=s" => \$flag_steam,
 	);
@@ -76,3 +78,5 @@ if ($flag_lastfm) { &lastfm_main($flag_lastfm); }
 if ($flag_check) { &check($flag_check); }
 if ($flag_steam) { &steam_main($flag_steam); }
 if ($flag_nick) { &nick_main($flag_nick); }
+if ($flag_email) { &email_main($flag_email); }
+if ($flag_process) { &process_main($flag_process); }
