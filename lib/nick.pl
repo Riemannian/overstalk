@@ -24,7 +24,7 @@ sub nick_main {
 	&nick_reddit($nick);
 	&nick_epinions($nick);
 	&nick_gather($nick);
-	
+	&nick_xing($nick);	
 }
 
 sub nick_facebook {
@@ -269,6 +269,17 @@ sub nick_gather($nick) {
         print "Gather: ";
         if ($req->status_line !~ /404/) {
                 print "YES! ( http://gather.com/author/$nick )\n";
+        } else {
+                print "NO!\n";
+        }
+}
+
+sub nick_xing {
+        $nick = $_[0];
+        $req = $ua->get("https://www.xing.com/profile/".$nick);
+        print "Xing: ";
+        if ($req->status_line !~ /410/) {
+                print "YES! ( https://www.xing.com/profile/$nick )\n";
         } else {
                 print "NO!\n";
         }
