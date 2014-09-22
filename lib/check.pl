@@ -46,6 +46,10 @@ sub search_sn {
 		if ($trozo =~ m/https\:\/\/www\.moodyo\.com\/users\/(.*?)\"/g) {
 			$listado .= "[+] MoodYo: $1#\n";
 		}
+		if ($trozo =~ m/http\:\/\/www\.flickr\.com\/(.*?)\"/g) {
+                        $listado .= "[+] Flickr: $1#\n";
+                }
+		
 	}
 	return $listado;
 }
