@@ -1,6 +1,6 @@
 sub nick_main {
 	$nick = $_[0];
-	$ua = LWP::UserAgent->new; $ua->agent($defined_useragent);
+	$ua = LWP::UserAgent->new; $ua->agent($defined_useragent); 
 	print "[+] Checking if $nick is taken: \n\n";
 	&nick_facebook($nick);
 	&nick_youtube($nick);
@@ -24,7 +24,9 @@ sub nick_main {
 	&nick_reddit($nick);
 	&nick_epinions($nick);
 	&nick_gather($nick);
-	&nick_xing($nick);	
+	&nick_xing($nick);
+	&nick_netlog($nick);	
+	&nick_badoo($nick);
 }
 
 sub nick_facebook {
@@ -286,8 +288,29 @@ sub nick_xing {
 }
 
 
+sub nick_netlog {
+        $nick = $_[0];
+        $req = $ua->get("http://es.netlog.com/".$nick);
+        print "Netlog: ";
+        if ($req->decoded_content !~ /no existe en Netlog/) {
+                print "YES! ( http://es.netlog.com/$nick )\n";
+        } else {
+                print "NO!\n";
+        }
+}
 
-
+sub nick_badoo {
+        $nick = $_[0];
+	$ua->max_redirect(0);
+        $req = $ua->get("http://badoo.com/es/".$nick);
+        print "Badoo: ";
+        if ($req->status_line !~ /301/) {
+                print "YES! ( http://badoo.com/es/$nick )\n";
+        } else {
+                print "NO!\n";
+        }
+	$ua->max_redirect(7);
+}
 
 
 
