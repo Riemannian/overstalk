@@ -27,6 +27,7 @@ sub nick_main {
 	&nick_xing($nick);
 	&nick_netlog($nick);	
 	&nick_badoo($nick);
+	&nick_meneame($nick);
 }
 
 sub nick_facebook {
@@ -312,6 +313,16 @@ sub nick_badoo {
 	$ua->max_redirect(7);
 }
 
+sub nick_meneame {
+        $nick = $_[0];
+        $req = $ua->get("https://www.meneame.net/user/".$nick);
+        print "Meneame: ";
+        if ($req->status_line !~ /404/) {
+                print "YES! ( https://www.meneame.net/user/$nick )\n";
+        } else {
+                print "NO!\n";
+        }
+}
 
 
 
